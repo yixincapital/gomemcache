@@ -243,6 +243,7 @@ func (c *Client) dial(addr net.Addr) (net.Conn, error) {
 	}
 
 	nc, err := net.DialTimeout(addr.Network(), addr.String(), c.netTimeout())
+	//fmt.Println(err)
 	if err == nil {
 		return nc, nil
 	}
