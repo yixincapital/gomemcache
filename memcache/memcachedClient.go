@@ -4,6 +4,7 @@ import (
 	"sync"
 	"time"
 	serialization "github.com/reckcn/cache/serialization"
+	//"fmt"
 )
 
 var (
@@ -42,9 +43,13 @@ func (self *MemcachedClient) SetValue(key string, v interface{}, expiration int3
 }
 
 func (self *MemcachedClient) GetValue(key string, v ...interface{}) error {
+	//fmt.Println(key)
 	item, err := self.Client.Get(key)
 	if err != nil {
-		return err
+		if err != ErrCacheMiss {
+			return err
+		}
+		return nil
 	}
 	e := self.factory.Unmarshal(item.Value, v...)
 	return e
