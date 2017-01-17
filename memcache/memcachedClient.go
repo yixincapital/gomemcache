@@ -38,7 +38,7 @@ func (self *MemcachedClient) SetValue(key string, v interface{}, expiration int3
 	if err != nil {
 		return err
 	}
-	e := self.Client.Set(&Item{Key: key, Value: data, Expiration: expiration})
+	e := self.Client.Set(&Item{Key: key, Value: data, Expiration: expiration, Flags:uint32(123)})
 	return e
 }
 
